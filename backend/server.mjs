@@ -1,9 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import {User} from "./models/user.model.mjs";
 import cors from 'cors'
-import { createUserController } from "./controllers/user.middleware.mjs";
 import userRouter from "./routes/user.route.mjs";
 dotenv.config();
  
