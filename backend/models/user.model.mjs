@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { hashPassword, verifyPassword } from "../services/auth.service.mjs";
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   fullname: {
     type: String,
     required: [true, "Fullname is required"],
@@ -8,7 +9,7 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     required: [true, "Email is required"],
-    unique: true
+    unique: true,
   },
 
   password: {
@@ -33,12 +34,25 @@ const userSchema = mongoose.Schema({
 export const User = mongoose.model("users", userSchema);
 
 export const createUser = async ({ fullname, email, password }) => {
-    try {
-      const newUser = await User.create({ fullname, email, password });
-      if (!newUser) return console.log('Error creating user');
-      return newUser;
-    } catch (error) {
-      console.error(`Error creating user: ${error}`)
-    }
-  };
-  
+  try {
+    password = await hashPassword(password);
+    const newUser = await User.create({ fullname, email, password });
+    if (!newUser) return console.log("Error creating user");
+    return newUser;
+  } catch (error) {
+    console.error(`Error creating user: ${error}`);
+  }
+};
+
+export const verifyUser = async ({ email, password }) => {
+  try {
+    const user = await User.findOne({ email }).exec()
+    if (!user) return false
+    const hashedPassword = user.password
+    const passwordVerification = await verifyPassword(password, hashedPassword)
+    if(!passwordVerification) return false
+    return user
+  } catch (error) {
+    console.error(`Error verifying user: ${error}`);
+  }
+}
