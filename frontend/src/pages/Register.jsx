@@ -13,7 +13,7 @@ function Register() {
   const [toastMessage, setToastMessage] = useState('Loading...')
 
   const navigate = useNavigate()
-  const BASE_URL = 'http://localhost:3000'
+  const BASE_URL = 'https://personal-blog-app-7iu1.onrender.com'
 
   const option = {
     method: "POST",
