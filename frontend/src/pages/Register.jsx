@@ -58,10 +58,10 @@ function Register() {
               Create an account
             </h1>
             <form className="space-y-4 md:space-y-6" action="#">
-              <Input autoComplete={false} title={'Fullname'} id={'fullname'} placeholder={'Nick-Lemy Kayiranga'} setInput={setFullname} />
+              <Input title={'Fullname'} id={'fullname'} placeholder={'Nick-Lemy Kayiranga'} setInput={setFullname} />
               <Input title={'Email'} id={'email'} placeholder={'nicklemykayiranga@gmail.com'} setInput={setEmail} />
               <Input title={'Password'} id={'password'} placeholder={'••••••••'} setInput={setPassword} />
-              <Input autoComplete={'new-password'} title={'Confirm Password'} id={'password'} placeholder={'password confirmation'} setInput={setConfirmPassword} />
+              <Input title={'Confirm Password'} id={'password'} placeholder={'password confirmation'} setInput={setConfirmPassword} />
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
@@ -78,14 +78,14 @@ function Register() {
                 userRegistration()
                 const toat = document.getElementById('toat')
                 if (toat.className.includes('hidden')) {
-                  toat.classList.add('flex')
+                  toat.classList.toggle('flex')
                   toat.classList.remove('hidden')
                 }
               }} type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-800">
                 Sign in
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don't have an account yet? <Link to="/login" className="font-medium text-blue-500 hover:underline ">Login</Link>
+                Already have an account? <Link to="/login" className="font-medium text-blue-500 hover:underline ">Login</Link>
               </p>
             </form>
           </div>
