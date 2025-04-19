@@ -47,7 +47,7 @@ function Register() {
   return (
     <section className="h-screen bg-gray-900">
       <Toast title={toastMessage} sucess={!toastMessage.includes('Failed') ? true : false} />
-      <div className="flex flex-col items-center self-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+      <div className="flex flex-col items-center self-center justify-center px-6 py-8 mx-auto h-full lg:py-0">
         <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-white">
           <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
           Nick's Blog
