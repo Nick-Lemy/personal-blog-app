@@ -11,7 +11,7 @@ function Login() {
 
     const navigate = useNavigate()
     const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
-
+    console.log(BACKEND_BASE_URL)
     const option = {
         method: "POST",
         headers: {
