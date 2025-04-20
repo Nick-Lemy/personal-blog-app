@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from 'cors'
 import userRouter from "./routes/user.route.mjs";
+import postRouter from "./routes/post.route.mjs";
 dotenv.config();
  
 const PORT = process.env.PORT;
@@ -13,6 +14,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.json())
 
 app.use('/user', userRouter)
+app.use('/post', postRouter)
 
 
 mongoose.connect(MONGODB_CONNECTION_STRING).then(() => {

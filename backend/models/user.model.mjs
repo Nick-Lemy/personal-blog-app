@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import { hashPassword, verifyPassword } from "../services/auth.service.mjs";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   fullname: {
     type: String,
     required: [true, "Fullname is required"],
@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-export const User = mongoose.model("users", userSchema);
+export const User = model("users", userSchema);
 
 export const createUser = async ({ fullname, email, password }) => {
   try {
