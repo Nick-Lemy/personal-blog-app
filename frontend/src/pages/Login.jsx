@@ -10,7 +10,7 @@ function Login() {
     const [toastMessage, setToastMessage] = useState('Loading...')
 
     const navigate = useNavigate()
-    const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL
+    const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
 
     const option = {
         method: "POST",
