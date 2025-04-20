@@ -23,7 +23,7 @@ function Login() {
         })
     }
     const userLogin = async () => {
-        const response = await fetch(`${BASE_URL}/user/login`, option)
+        const response = await fetch(`${BACKEND_BASE_URL}/user/login`, option)
         if (!response.ok) {
             setToastMessage('User Not Found!')
             return;

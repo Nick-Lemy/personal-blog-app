@@ -31,7 +31,7 @@ function Register() {
       setToastMessage('Password Confirmation Failed!')
       return;
     }
-    const response = await fetch(`${BASE_URL}/user/register`, option)
+    const response = await fetch(`${BACKEND_BASE_URL}/user/register`, option)
     if (!response.ok) {
       setToastMessage('User Registration Failed!')
       return;
