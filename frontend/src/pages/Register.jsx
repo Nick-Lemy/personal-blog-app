@@ -13,7 +13,7 @@ function Register() {
   const [toastMessage, setToastMessage] = useState('Loading...')
 
   const navigate = useNavigate()
-  const BASE_URL = 'https://personal-blog-app-7iu1.onrender.com'
+  const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL
 
   const option = {
     method: "POST",
