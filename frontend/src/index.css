@@ -1,5 +1,9 @@
 @import "tailwindcss";
 .markdown > * {
+  display: block;
   all: revert;
   white-space: pre-wrap;
+  background-color: transparent;
+  padding: 1rem;
+  border-radius: 5px;
 }

@@ -54,7 +54,8 @@ function Navbar() {
         </Link>
       </div>
 
-      <hr className="border-gray-800 border-1 mb-6" /></>
+      <hr className="border-gray-800 border-1 mb-6" />
+    </>
   )
 }
 
