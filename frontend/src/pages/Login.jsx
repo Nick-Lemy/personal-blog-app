@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Input from '../componets/Input'
 import { useState } from 'react'
 import { Toast } from '../componets/Toast'
+import { BACKEND_BASE_URL } from '../utils/environment.varible.mjs';
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -10,7 +11,6 @@ function Login() {
     const [toastMessage, setToastMessage] = useState('Loading...')
 
     const navigate = useNavigate()
-    const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
     const option = {
         method: "POST",
         headers: {

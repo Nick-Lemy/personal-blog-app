@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import Navbar from '../sections/Navbar';
 import Card from '../componets/Card';
 import { useEffect } from 'react';
+import { BACKEND_BASE_URL } from '../utils/environment.varible.mjs';
 
 function Home() {
   const [allPosts, setAllPosts] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
-  const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
 
   const fetchPosts = async () => {
 
