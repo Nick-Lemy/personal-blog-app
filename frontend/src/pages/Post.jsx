@@ -29,7 +29,7 @@ function Post() {
                 <div className='text-white flex flex-col'>
                     <h1 className='text-lg font-bold'>{post.title}</h1>
                     <h2 className='text-xs text-gray-200 font-light'>{post.subtitle}</h2>
-                    <div className='markdown'>
+                    <div className='markdown text-wrap'>
                         <ReactMarkdown>
                             {post.main}
                         </ReactMarkdown>

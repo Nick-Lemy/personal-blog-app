@@ -1,4 +1,5 @@
 @import "tailwindcss";
 .markdown > * {
-    all: revert;
-  }
+  all: revert;
+  white-space: pre-wrap;
+}
