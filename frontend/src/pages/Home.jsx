@@ -24,7 +24,7 @@ function Home() {
   }, [searchTerm ])
 
   return (
-    <div className="flex bg-gray-800 justify-center overflow-auto md:p-4">
+    <div className="flex bg-gray-800 justify-center overflow-auto p-2 md:p-4">
       <div className="flex-1 p-5 md:p-10 border-2 border-gray-600 bg-gray-900 rounded-2xl">
         <Navbar />
         <div className="relative w-fit pb-5">
