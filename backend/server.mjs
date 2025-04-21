@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from 'cors'
 import userRouter from "./routes/user.route.mjs";
 import postRouter from "./routes/post.route.mjs";
+import likeRouter from "./routes/like.route.mjs";
 dotenv.config();
  
 const PORT = process.env.PORT;
@@ -15,6 +16,7 @@ app.use(express.json())
 
 app.use('/user', userRouter)
 app.use('/post', postRouter)
+app.use('/like', likeRouter)
 
 mongoose.connect(MONGODB_CONNECTION_STRING).then(() => {
   console.log("Connected to the database!");
