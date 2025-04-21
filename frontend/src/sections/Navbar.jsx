@@ -30,13 +30,13 @@ function Navbar() {
 
           {/* <!-- User Avatars --> */}
           <div className="flex -space-x-2">
-            <div className="p-5 rounded-full bg-blue-300 border-2 border-white z-30"></div>
+            <div className="p-5 rounded-full bg-blue-600 border-2 border-gray-500 z-30"></div>
           </div>
         </div>
       </div>
 
       {/* <!-- Tabs --> */}
-      <div className="navbar flex mb-2 *:cursor-pointer *:transform *:duration-200 *:rounded-md *:ease-in">
+      <div className="navbar flex mb-2 *:text-sm *:md:text-base *:cursor-pointer *:transform *:duration-200 *:rounded-md *:ease-in">
         <button className="px-4 py-2 text-white bg-blue-900">Home</button>
         <button className="px-4 py-2 text-gray-400">Favorites</button>
         <button className="px-4 py-2 text-gray-400">History</button>
