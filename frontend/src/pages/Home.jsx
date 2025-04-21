@@ -12,7 +12,7 @@ function Home() {
     try {
       const posts = await fetch(`${BACKEND_BASE_URL}/post/all`)
       const data = await posts.json()
-      setAllPosts(data)
+      setAllPosts(data.reverse())
     } catch (error) {
       console.error('Error while fetching Posts: ', error)
     }
