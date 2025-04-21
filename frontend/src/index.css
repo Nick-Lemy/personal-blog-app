@@ -1,9 +1,17 @@
 @import "tailwindcss";
 .markdown > * {
-  display: block;
-  all: revert;
   white-space: pre-wrap;
-  background-color: transparent;
+  word-break: break-word;
   padding: 1rem;
   border-radius: 5px;
+  overflow-x: auto;
+}
+
+.markdown pre {
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+.markdown code span {
+  white-space: pre-wrap; /* Wrap lines within code blocks */
+  word-break: break-word; /* Break long words */
 }

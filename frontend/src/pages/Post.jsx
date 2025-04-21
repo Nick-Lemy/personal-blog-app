@@ -50,7 +50,7 @@ function Post() {
                     <hr className="border-gray-800 border-1 mb-6" />
                 </div>
                 <div className='text-white flex flex-col'>
-                    <div className='markdown text-wrap' >
+                    <div className='markdown' >
                         {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {post.main}
                         </ReactMarkdown> */}
