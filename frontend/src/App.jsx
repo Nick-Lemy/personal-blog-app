@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound'
 
 function App() {
   return (
-    <div className='app h-screen bg-gray-900'>
+    <div className='app h-screen bg-gray-800'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
