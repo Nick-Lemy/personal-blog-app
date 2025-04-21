@@ -19,7 +19,6 @@ app.use('/post', postRouter)
 
 mongoose.connect(MONGODB_CONNECTION_STRING).then(() => {
   console.log("Connected to the database!");
-
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT} => http://localhost:${PORT}`);
   });

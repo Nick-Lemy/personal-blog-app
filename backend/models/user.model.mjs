@@ -50,7 +50,7 @@ export const verifyUser = async ({ email, password }) => {
     if (!user) return false
     const hashedPassword = user.password
     const passwordVerification = await verifyPassword(password, hashedPassword)
-    if(!passwordVerification) return false
+    if (!passwordVerification) return false
     return user
   } catch (error) {
     console.error(`Error verifying user: ${error}`);

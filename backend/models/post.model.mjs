@@ -41,21 +41,31 @@ const postSchema = new Schema({
 export const Post = model("posts", postSchema);
 
 export const createPost = async ({ title, subtitle, main, author }) => {
-  try {
-    const newPost = await Post.create({ title, subtitle, main, author });
-    if (!newPost) return console.log("Error creating post");
-    return newPost;
-  } catch (error) {
-    console.error(`Error creating post: ${error}`);
-  }
+    try {
+        const newPost = await Post.create({ title, subtitle, main, author });
+        if (!newPost) return console.log("Error creating post");
+        return newPost;
+    } catch (error) {
+        console.error(`Error creating post: ${error}`);
+    }
 };
 
 export const displayAllPosts = async () => {
-    try{
+    try {
         const allPosts = await Post.find({})
-        if(!allPosts) return console.log('Error displaying all posts')
+        if (!allPosts) return console.log('Error displaying all posts')
         return allPosts
-    } catch(error){
+    } catch (error) {
         console.error(`Error displaying all posts: ${error}`)
+    }
+}
+
+export const displayPostWithId = async ({ id }) => {
+    try {
+        const post = await Post.findOne({ _id: id });
+        if (!post) return console.log(`Error finding post`)
+        return post
+    } catch (error) {
+        console.error(`Error finding post : ${id}`)
     }
 }
