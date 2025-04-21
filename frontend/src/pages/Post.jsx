@@ -4,19 +4,21 @@ import { BACKEND_BASE_URL } from '../utils/environment.varible.mjs';
 import ReactMarkdown from "react-markdown";
 import { Link } from 'react-router-dom';
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import Like from '../componets/Like';
 
 function Post() {
     const { id } = useParams()
     const [post, setPost] = useState('')
-    const [likes, setLikes] = useState([])
-    // const [like]
+    const [likes, setLikes] = useState(0)
+    const [liked, setLiked] = useState(false)
 
-    const getLikes = async () => {
+    const getLikes = async (id) => {
         try {
             const allLikes = await fetch(`${BACKEND_BASE_URL}/like/${id}`)
-            if(!allLikes.ok) return console.log('Error fetching likes')
+            if (!allLikes.ok) return console.log('Error fetching likes')
             const data = await allLikes.json()
-            setLikes(data)
+            setLikes(data.length)
+            console.log(data)
         } catch (error) {
             console.error('Error fetching likes: ', error)
         }
@@ -34,7 +36,8 @@ function Post() {
     }
     useEffect(() => {
         getPost(id)
-        getLikes()
+        getLikes(id)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
     return (
 
@@ -69,14 +72,16 @@ function Post() {
                     </div>
                     <div className='md:flex-2'>
                         <div className='flex flex-row justify-evenly '>
-                            <div className='flex h-fit flex-col justify-center items-center w-fit'>
-                                <svg className='fill-white self-center' width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181" /></svg>
-                                {/* <svg className='fill-blue-500 self-center'  width="28" height="28" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fill-rule="nonzero" /></svg> */}
-                                <p> {(likes.length || 0) + ' like(s)'} </p>
+                            <div onClick={() => {
+                                setLiked(true)
+                                setLikes(!liked ? likes + 1 : likes)
+                            }} className='flex h-fit flex-col justify-center items-center w-fit'>
+                                <Like liked={liked} />
+                                <p> {(likes || 0) + ' like(s)'} </p>
                             </div>
                             <div className='flex flex-col h-fit justify-center items-center w-fit'>
-                                <svg className='fill-white ' width="26" height="26" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z" /></svg>
-                                {/* <svg className='fill-blue-500 self-center'  width="28" height="28" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fill-rule="nonzero" /></svg> */}
+                                <svg className='fill-white ' width="26" height="26" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z" /></svg>
+                                {/* <svg className='fill-blue-500 self-center'  width="28" height="28" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fillRule="nonzero" /></svg> */}
                                 <p>Favorites</p>
                             </div>
                             <div className='flex flex-col h-fit justify-center items-center w-fit'>
