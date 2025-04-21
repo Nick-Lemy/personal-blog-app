@@ -54,7 +54,7 @@ function Post() {
                         {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {post.main}
                         </ReactMarkdown> */}
-                        <MarkdownPreview source={post.main} />
+                        <MarkdownPreview style={{ backgroundColor: 'transparent', color: 'white', padding: '0px' }}  className='bg-white' source={post.main} />
                     </div>
                 </div>
             </div>
