@@ -213,7 +213,7 @@ function Home() {
             </div>
           ) : allPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {allPosts.map((post, index) => (
+              {allPosts.map((post) => (
                 <Link key={post._id} to={`/post/${post._id}`}>
                   <article className="group h-full border border-zinc-800 rounded-xl overflow-hidden bg-zinc-900 hover:bg-zinc-800 transition-colors">
                     <div className="p-6 flex flex-col h-full">
