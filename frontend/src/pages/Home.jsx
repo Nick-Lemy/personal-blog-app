@@ -116,6 +116,14 @@ function Home() {
             </Link>
           </nav>
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allPosts && (allPosts.length > 0 ?
+            allPosts.map(post => (
+              <Card title={post.title} subtitle={post.subtitle} content={post.main.slice(0, 150) + '...'} color={{ bg: 'bg-blue-950', txt: 'text-white' }} id={post._id} />
+            )) : (
+              <h1 className='text-red-600 text-xl'>{`"${searchTerm}" Not Found`}</h1>
+            ))
+          }
       )}
       
       <main className="container mx-auto px-4 py-12">
