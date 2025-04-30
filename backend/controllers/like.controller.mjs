@@ -13,7 +13,6 @@ export const addLikeController = async (req, res) => {
 
 export const getLikesOfPostController = async (req, res) => {
     try {
-        console.log(1)
         const allLikes = await getLikesOfPost(req.params)
         if(!allLikes) return res.status(400).send({error: 'Error getting all likes'})
         return res.status(200).send(allLikes) 

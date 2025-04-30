@@ -58,7 +58,7 @@ function Register() {
               Create an account
             </h1>
             <form className="space-y-4 md:space-y-6" action="#">
-              <Input title={'Fullname'} id={'fullname'} placeholder={'Nick-Lemy Kayiranga'} setInput={setFullname} />
+              <Input title={'Fullname'} id={'myname'} placeholder={'Nick-Lemy Kayiranga'} setInput={setFullname} />
               <Input title={'Email'} id={'email'} placeholder={'nicklemykayiranga@gmail.com'} setInput={setEmail} />
               <Input title={'Password'} id={'password'} placeholder={'••••••••'} setInput={setPassword} />
               <Input title={'Confirm Password'} id={'password'} placeholder={'password confirmation'} setInput={setConfirmPassword} />
