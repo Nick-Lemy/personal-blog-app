@@ -5,9 +5,6 @@ import bodyParser from "body-parser";
 import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors'
-import userRouter from "./routes/user.route.mjs";
-import postRouter from "./routes/post.route.mjs";
-import likeRouter from "./routes/like.route.mjs";
 import { MONGODB_CONNECTION_STRING, PORT } from "./utils/constants.mjs"
 
 const app = express();
