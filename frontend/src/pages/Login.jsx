@@ -1,43 +1,35 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Input from '../componets/Input'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Toast } from '../componets/Toast'
-import { BACKEND_BASE_URL } from '../utils/environment.varible.mjs';
+import { AuthContext } from '../utils/AuthContext'
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [toastMessage, setToastMessage] = useState('Loading...')
 
+
     const navigate = useNavigate()
-    const option = {
-        method: "POST",
-        headers: {
-            "Content-Type": 'application/json'
-        },
-        body: JSON.stringify({
-            email,
-            password
-        })
-    }
-    const userLogin = async () => {
-        const response = await fetch(`${BACKEND_BASE_URL}/user/login`, option)
-        if (!response.ok) {
-            setToastMessage('User Not Found!')
-            return;
+    const { login } = useContext(AuthContext);
+
+    const userLogin = async (e) => {
+        e.preventDefault();
+        const success = await login(email, password);
+        if (success) {
+            setToastMessage('Login Successful!')
+            setInterval(() =>
+                navigate('/')
+                , 1000)
+        } else {
+            setToastMessage('Login Failed!')
         }
-        const data = await response.json()
-        console.log(data)
-        setToastMessage('User Found!')
-        setInterval(() => 
-            navigate('/')
-        , 1000)
     }
 
     return (
         <section className="h-screen bg-gray-900">
-            <Toast title={toastMessage} sucess={toastMessage.includes('Not') ? false : true} />
+            <Toast title={toastMessage} sucess={toastMessage.includes('Failed') ? false : true} />
             <div className="flex flex-col items-center self-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                 <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-white">
                     <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
@@ -64,7 +56,7 @@ function Login() {
                             </div>
                             <button onClick={(e) => {
                                 e.preventDefault()
-                                userLogin()
+                                userLogin(e)
                                 const toat = document.getElementById('toat')
                                 if (toat.className.includes('hidden')) {
                                     toat.classList.toggle('flex')

@@ -56,3 +56,13 @@ export const verifyUser = async ({ email, password }) => {
     console.error(`Error verifying user: ${error}`);
   }
 }
+
+export const getUserInfo = async (id) => {
+  try {
+    const user = await User.findOne({_id: id});
+    if(!user) return console.log('user Not Found')
+    return user
+  } catch (error) {
+    console.error(`Error getting user information: ${error}`)
+  }
+}
