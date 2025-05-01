@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 
 function Card({ title, subtitle, content, color, id }) {
+    const navigate = useNavigate()
     return (
         <div className="h-full card">
             <div className={`${color.bg} h-full rounded-xl p-6 ${color.txt} relative overflow-hidden`}>
@@ -12,11 +13,12 @@ function Card({ title, subtitle, content, color, id }) {
                     <ReactMarkdown >
                         {content}
                     </ReactMarkdown>
-                    <Link className='cursor-pointer' to={`/post/${id}`}>
-                        <button className="bg-white cursor-pointer text-blue-950 rounded-full px-4 py-1 text-sm font-medium flex items-center">
-                            Read More
-                        </button>
-                    </Link>
+                    <button onClick={e=>{
+                        e.preventDefault()
+                        navigate(`/post/${id}`)
+                    }} className="bg-white w-fit cursor-pointer text-blue-950 rounded-full px-4 py-1 text-sm font-medium flex items-center">
+                        Read More
+                    </button>
                 </div>
             </div>
         </div>

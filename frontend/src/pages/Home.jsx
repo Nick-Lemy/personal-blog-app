@@ -3,32 +3,40 @@ import Navbar from '../sections/Navbar';
 import Card from '../componets/Card';
 import { useEffect } from 'react';
 import { BACKEND_BASE_URL } from '../utils/environment.varible.mjs';
+import axios from 'axios';
 
 function Home() {
   const [allPosts, setAllPosts] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
   const fetchPosts = async () => {
-
-    const posts = await fetch(`${BACKEND_BASE_URL}/post/all`)
-    const data = await posts.json()
-    const searchedPosts = await data.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    try {
+    const token = localStorage.getItem('token')
+    console.log(token)
+    const posts = await axios.get(`${BACKEND_BASE_URL}/post/all`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    const data = posts.data
+    const searchedPosts = data.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
     setAllPosts(searchedPosts)
-    console.log(allPosts)
+    } catch (error) {
+      console.log(error)
+    }
   }
-
 
   useEffect(() => {
     fetchPosts()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm])
 
   return (
     <div className="flex bg-gray-800 justify-center overflow-auto md:p-4">
       <div className="flex-1 p-5 md:p-10 border-2 m-2 border-gray-600 bg-gray-900 rounded-2xl">
         <Navbar />
         <div className="relative w-fit pb-5">
-          <input onChange={(e) => setSearchTerm(e.target.value) } type="text" placeholder="Search..." className="bg-transparent text-white border border-gray-400 rounded-full py-2 px-4 w-64" />
+          <input onChange={(e) => setSearchTerm(e.target.value)} type="text" placeholder="Search..." className="bg-transparent text-white border border-gray-400 rounded-full py-2 px-4 w-64" />
           <span className="absolute right-3 top-2 text-gray-400"></span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

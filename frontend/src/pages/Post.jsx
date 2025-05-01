@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { Link } from 'react-router-dom';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import Like from '../componets/Like';
+import axios from 'axios';
 
 function Post() {
     const { id } = useParams()
@@ -14,9 +15,13 @@ function Post() {
 
     const getLikes = async (id) => {
         try {
-            const allLikes = await fetch(`${BACKEND_BASE_URL}/like/${id}`)
-            if (!allLikes.ok) return console.log('Error fetching likes')
-            const data = await allLikes.json()
+            const token = localStorage.getItem('token');
+            const allLikes = await axios(`${BACKEND_BASE_URL}/like/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            const data = allLikes.data
             setLikes(data.length)
             console.log(data)
         } catch (error) {
@@ -26,10 +31,14 @@ function Post() {
 
     const getPost = async (id) => {
         try {
-            let thePost = await fetch(`${BACKEND_BASE_URL}/post/${id}`)
-            thePost = await thePost.json()
-            if (!thePost) return console.log('Error fetching post')
-            setPost(thePost)
+            const token = localStorage.getItem('token');
+            console.log(token)
+            const response = await axios.get(`${BACKEND_BASE_URL}/post/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            setPost(response.data)
         } catch (error) {
             console.error(`Error fetching post: ${error}`)
         }
