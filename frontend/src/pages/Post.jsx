@@ -68,9 +68,7 @@ function Post() {
                         </div>
                     </div>
                     <div className="navbar flex mb-2 *:text-sm **:md:text-base **:cursor-pointer *:transform *:duration-200 *:rounded-md *:ease-in">
-                        <Link to='/' className="text-white hover:underline">
-                            <h2 className='text-xs text-gray-200 font-light'>{post.subtitle}</h2>
-                        </Link>
+                        <h2 className='hover:underline text-gray-200 font-light'>{post.subtitle}</h2>
                     </div>
 
                     <hr className="border-gray-800 border-1 mb-6" />

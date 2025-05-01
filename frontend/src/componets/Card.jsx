@@ -7,10 +7,10 @@ function Card({ title, subtitle, content, color, id }) {
     return (
         <div className="h-full card">
             <div className={`${color.bg} h-full rounded-xl p-6 ${color.txt} relative overflow-hidden`}>
-                <div className="justify-center gap-3 h-full flex flex-col">
+                <div className="justify-between gap-3 h-full flex flex-col">
                     <h2 className="md:text-4xl text-2xl  font-bold mb-1"> {title}</h2>
                     <p className="text-xl md:text-lg mb-4">{subtitle}</p>
-                    <ReactMarkdown >
+                    <ReactMarkdown style={{ color: 'red'}}>
                         {content}
                     </ReactMarkdown>
                     <button onClick={e=>{
