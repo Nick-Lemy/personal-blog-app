@@ -10,7 +10,7 @@ import ProtectedRoute from './componets/ProtectedRoute'
 function App() {
 
   return (
-    <div className='app h-screen bg-gray-800'>
+    <div className='app bg-gray-800'>
       <Routes>
         <Route path='/' element={
             <ProtectedRoute>
