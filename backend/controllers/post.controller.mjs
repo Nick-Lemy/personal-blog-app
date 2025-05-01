@@ -29,3 +29,14 @@ export const displayPostWithIdController = async (req, res) => {
         return res.status(404).send({ error: `Error finding post: ${error}` })
     }
 }
+
+export const getFavoritePostsController = async (req, res) => {
+    try {
+        console.log(req.user)
+        const favoritePosts = req.user.favorite
+        if (!favoritePosts) return res.status(404).send({error: "Error getting the fav posts"})
+        return res.status(200).send(favoritePosts)
+    } catch (error) {
+        return res.status(404).send({error: `Error getting favitite posts: ${error}`})
+    }
+}

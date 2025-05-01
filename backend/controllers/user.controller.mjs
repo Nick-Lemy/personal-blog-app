@@ -18,8 +18,8 @@ export const verifyUserController = async (req, res) => {
   try {
     const userVerification = await verifyUser(req.body)
     if (!userVerification) res.status(404).send({ message: 'User Not Found!' })
-    const {_id, fullname, email} = userVerification
-    const token = jwt.sign({_id, fullname, email}, TOKEN_SECRET, { expiresIn: '1h' })
+    const {_id, fullname, email, favorite} = userVerification
+    const token = jwt.sign({_id, fullname, email, favorite}, TOKEN_SECRET, { expiresIn: '1h' })
     return res.status(200).send({ token, user: userVerification })
   } catch (error) {
     return res.status(400).send({ error: `Error verifying user: ${error}` })
