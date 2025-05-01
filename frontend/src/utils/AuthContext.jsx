@@ -13,17 +13,18 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     console.log('New load')
     const token = localStorage.getItem('token');
+    console.log(token)
     if (token) {
       axios
         .get(`${BACKEND_BASE_URL}/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
-          setUser(response.data.user);
+          setUser(response.data);
         })
         .catch((error) => {
           console.log('error kkdjs', error)
-          // localStorage.removeItem('token');
+          localStorage.removeItem('token');
         })
         .finally(() => {
           setLoading(false);
