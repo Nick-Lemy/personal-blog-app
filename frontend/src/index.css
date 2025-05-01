@@ -8,7 +8,7 @@
 }
 
 .markdown pre {
-  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  overflow-x: scroll; /* Enable horizontal scrolling if needed */
 }
 
 .markdown code span {
