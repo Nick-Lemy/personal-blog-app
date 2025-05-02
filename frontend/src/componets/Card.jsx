@@ -13,9 +13,6 @@ function Card({ title, subtitle, color, id, date }) {
                 <div className="justify-between gap-3 h-full flex flex-col">
                     <h2 className="md:text-4xl text-2xl font-medium mb-1"> {title}</h2>
                     <p className="text-xl font-light text-gray-400 md:text-lg mb-4">{subtitle}</p>
-                    {/* <ReactMarkdown style={{ color: 'red' }}>
-                        {content}
-                    </ReactMarkdown> */}
                     <div className='flex justify-between items-center'>
                         <a href={`/post/${id}`} className="bg-white w-fit cursor-pointer text-blue-950 rounded-full px-4 py-1 text-sm font-medium flex items-center">
                             Read More

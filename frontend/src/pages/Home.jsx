@@ -20,7 +20,7 @@ function Home() {
     })
     const data = posts.data
     const searchedPosts = data.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
-    setAllPosts(searchedPosts)
+    setAllPosts(searchedPosts.reverse())
     } catch (error) {
       console.log(error)
     }

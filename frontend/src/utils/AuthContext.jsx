@@ -3,6 +3,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { BACKEND_BASE_URL } from './environment.varible.mjs';
+import { BrowserRouter } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
@@ -57,7 +58,9 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, loading, login, logout }}>
-      {children}
+      <BrowserRouter>
+        {children}
+      </BrowserRouter>
     </AuthContext.Provider>
   );
 };
