@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { getUserInfo, User } from "./user.model.mjs";
 
 const postSchema = new Schema({
     title: {
@@ -67,5 +68,21 @@ export const displayPostWithId = async ({ id }) => {
         return post
     } catch (error) {
         console.error(`Error finding post : ${id}`)
+    }
+}
+
+export const addPostToFavorite = async (user_id, post_id) => {
+    try {
+        const user = await User.findOne({ _id: user_id })
+        if (!user) return console.log('User not found')
+        const favorite = user.favorite
+        console.log(favorite, post_id)
+        if(favorite.includes(post_id)) return console.log(`Post Aleady in Fav`)
+        favorite.push(post_id)
+        const addPost = await User.updateOne({ _id: user_id }, { favorite })
+        if (!addPost) return console.log(`Error adding post tp favorites`)
+        return addPost
+    } catch (error) {
+        console.error(`Error adding post to favorites: ${error}`)
     }
 }
