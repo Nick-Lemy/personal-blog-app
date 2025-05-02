@@ -1,4 +1,8 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins'
+}
 .markdown > * {
   white-space: pre-wrap;
   word-break: break-word;

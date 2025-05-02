@@ -11,25 +11,25 @@ function Favorites() {
 
   const fetchPosts = async () => {
     try {
-    const token = localStorage.getItem('token')
-    console.log(token)
-    const posts = await axios.get(`${BACKEND_BASE_URL}/post/favorites`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    const data = []
-    for( const id of posts.data){
+      const token = localStorage.getItem('token')
+      console.log(token)
+      const posts = await axios.get(`${BACKEND_BASE_URL}/post/favorites`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const data = []
+      for (const id of posts.data) {
         const response = await axios.get(`${BACKEND_BASE_URL}/post/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
         data.push(response.data)
-    }
-    console.log(data)
-    const searchedPosts = data.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
-    setAllPosts(searchedPosts)
+      }
+      console.log(data)
+      const searchedPosts = data.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
+      setAllPosts(searchedPosts)
     } catch (error) {
       console.log(error)
     }
@@ -51,7 +51,7 @@ function Favorites() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {allPosts && (allPosts.length > 0 ?
             allPosts.map(post => (
-              <Card key={post._id} title={post.title} subtitle={post.subtitle} content={post.main.slice(0, 150) + '...'} color={{ bg: 'bg-blue-950', txt: 'text-white' }} id={post._id} />
+              <Card date={post.created_at} key={post._id} title={post.title} subtitle={post.subtitle} content={post.main.slice(0, 150) + '...'} color={{ bg: 'bg-blue-950', txt: 'text-white' }} id={post._id} />
             )) : (
               <h1 className='text-red-600 text-xl'>{`"${searchTerm}" Not Found`}</h1>
             ))
