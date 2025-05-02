@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import Post from './pages/Post'
 import ProtectedRoute from './componets/ProtectedRoute'
+import Favorites from './pages/Favorites'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path='/favorites' element={<Favorites />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { BACKEND_BASE_URL } from '../utils/environment.varible.mjs';
-import ReactMarkdown from "react-markdown";
 import { Link } from 'react-router-dom';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import Like from '../componets/Like';
@@ -12,11 +11,30 @@ function Post() {
     const [post, setPost] = useState('')
     const [likes, setLikes] = useState(0)
     const [liked, setLiked] = useState(false)
+    const navigate = useNavigate()
+
+    const addToFav = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            console.log(token)
+            const response = await fetch(`${BACKEND_BASE_URL}/post/${id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            if(!response.ok) throw new Error('nick')
+            alert('Added to favorite !')
+        } catch (error) {
+            alert('Can\'t add to Favorites')
+            console.error('Error adding to fav:', error)
+        }
+    }
 
     const getLikes = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            const allLikes = await axios(`${BACKEND_BASE_URL}/like/${id}`, {
+            const allLikes = await axios.get(`${BACKEND_BASE_URL}/like/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -46,19 +64,18 @@ function Post() {
     useEffect(() => {
         getPost(id)
         getLikes(id)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
     return (
 
         <div className="flex bg-gray-800 justify-center overflow-auto md:p-4">
             <div className="flex-1 p-5 md:p-10 border-2 m-2 border-gray-600 bg-gray-900 rounded-2xl">
                 <div>
-                    <Link to='/'>
-                        <svg className='w-6 md:w-10 mb-5 fill-white' id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 108.06">
+                    <div onClick={()=>navigate(-1)}>
+                        <svg className='cursor-pointer w-6 md:w-10 mb-5 fill-white' id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 108.06">
                             <title>back-arrow</title>
                             <path d="M63.94,24.28a14.28,14.28,0,0,0-20.36-20L4.1,44.42a14.27,14.27,0,0,0,0,20l38.69,39.35a14.27,14.27,0,0,0,20.35-20L48.06,68.41l60.66-.29a14.27,14.27,0,1,0-.23-28.54l-59.85.28,15.3-15.58Z" />
                         </svg>
-                    </Link>
+                    </div>
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-3xl font-bold text-blue-500">{post.title}</h1>
                         <div className="flex space-x-2 items-center">
@@ -86,7 +103,10 @@ function Post() {
                                 <Like liked={liked} />
                                 <p> {(likes || 0) + ' like(s)'} </p>
                             </div>
-                            <div className='flex flex-col h-fit justify-center items-center w-fit'>
+                            <div onClick={(e)=>{
+                                e.preventDefault()
+                                addToFav(id)
+                                }} className='flex flex-col h-fit justify-center items-center w-fit'>
                                 <svg className='fill-white ' width="26" height="26" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z" /></svg>
                                 {/* <svg className='fill-blue-500 self-center'  width="28" height="28" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fillRule="nonzero" /></svg> */}
                                 <p>Favorites</p>

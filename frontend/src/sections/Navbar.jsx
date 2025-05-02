@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../utils/AuthContext';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
 
 
+  const { logout } = useContext(AuthContext);
   const tabs = document.querySelectorAll('.navbar *');
 
   tabs.forEach(tab => {
@@ -39,6 +41,16 @@ function Navbar() {
               </svg>
             </div>
           </Link>
+
+          <button className='cursor-pointer text-white bg-black p-4' onClick={
+            
+            () => {
+              alert('delete');
+              logout()
+            }
+          }>
+            Logout
+          </button>
         </div>
       </div>
 
