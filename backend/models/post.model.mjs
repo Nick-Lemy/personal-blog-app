@@ -76,7 +76,6 @@ export const addPostToFavorite = async (user_id, post_id) => {
         const user = await User.findOne({ _id: user_id })
         if (!user) return console.log('User not found')
         const favorite = user.favorite
-        console.log(favorite, post_id)
         if(favorite.includes(post_id)) return console.log(`Post Aleady in Fav`)
         favorite.push(post_id)
         const addPost = await User.updateOne({ _id: user_id }, { favorite })
